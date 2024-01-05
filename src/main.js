@@ -27,7 +27,7 @@ async function main () {
       recordingTime += 0.1;
       document.querySelector(".recording-time").textContent = `${recordingTime.toFixed(1)}`+ " s";
      }, 100);
-  })
+  });
 
   btnStop.addEventListener('click', () => {
     document.querySelector('#greeting').innerText = "[ ダウンロード完了 ]";
@@ -36,7 +36,7 @@ async function main () {
     btnStart.removeAttribute('hidden');
 	btnStart.focus();
 	clearInterval(timer);
-  })
+  });
 
   mR.addEventListener('dataavailable', event => {
     player.src = URL.createObjectURL(event.data);
@@ -46,5 +46,5 @@ async function main () {
     a.href = player.src;
     a.download = fileName;
     a.click();
-  })
-}
+  });
+};
