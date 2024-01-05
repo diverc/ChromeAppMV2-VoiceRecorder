@@ -7,6 +7,17 @@ VoiceRecorderApp
   * ChromeOSでのみ動く、ChromeAppになります。
     * WindowsやMacなどでは、ChromeAppが廃止されてしましました。  
 
+
+---
+# インストール方法
+
+* 「VoiceRecorder.crx.rename.crx」をダウンロード
+* ダウンロードしたファイルの拡張子をcrxにリネーム(chromeでダウンロードできるようにするため変更)
+* chromeosのchromeで拡張機能の画面を開く
+* VoiceRecorder.crxを拡張画面にドラッグアンドドロップする
+* インストールされ、アプリのメニューから開けるようになる
+
+
 ---
 
 * 今後
