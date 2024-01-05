@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "LocalVoiceRecoder",
+  "short_name": "LocalVoiceRecoder",
+  "description": "VoiceRecoder without web server",
+  "version": "1.0.3",
+  "minimum_chrome_version": "38",
+  
+  "icons": {
+    "16": "assets/icon_16.png",
+    "128": "assets/icon_128.png"
+  },
+  "permissions": [
+    "app.window.alwaysOnTop",
+    "audioCapture"
+  ],
+  "offline_enabled": true,
+  "kiosk_enabled": true,
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  }
+}
