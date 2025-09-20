@@ -45,6 +45,21 @@ const Recording = () => {
           const url = window.URL.createObjectURL(audioBlob)
           setAudioURL(url)
 
+          // 録音時間を時間:分:秒形式に変換
+          const formatDuration = (seconds) => {
+            const hrs = Math.floor(seconds / 3600)
+            const mins = Math.floor((seconds % 3600) / 60)
+            const secs = seconds % 60
+            
+            if (hrs > 0) {
+              return `${hrs}h${mins.toString().padStart(2, "0")}m${secs.toString().padStart(2, "0")}s`
+            } else if (mins > 0) {
+              return `${mins}m${secs.toString().padStart(2, "0")}s`
+            } else {
+              return `${secs}s`
+            }
+          }
+
           const now = new Date()
           const fileName = `Voice_${now.getFullYear()}-${(now.getMonth() + 1)
             .toString()
@@ -57,9 +72,7 @@ const Recording = () => {
             .padStart(2, "0")}-${now
             .getSeconds()
             .toString()
-            .padStart(2, "0")}@${Math.floor(
-            stream.getAudioTracks()[0].getSettings().sampleRate / 1000
-          )}s.${audioType}`
+            .padStart(2, "0")}@${formatDuration(elapsedTime)}.${audioType}`
           setAudioFileName(fileName)
 
           // 録音終了時に自動ダウンロード
@@ -155,6 +168,22 @@ const Recording = () => {
 
       const downloadElement = document.createElement("a")
       downloadElement.href = tempURL
+      
+      // 録音時間を時間:分:秒形式に変換
+      const formatDuration = (seconds) => {
+        const hrs = Math.floor(seconds / 3600)
+        const mins = Math.floor((seconds % 3600) / 60)
+        const secs = seconds % 60
+        
+        if (hrs > 0) {
+          return `${hrs}h${mins.toString().padStart(2, "0")}m${secs.toString().padStart(2, "0")}s`
+        } else if (mins > 0) {
+          return `${mins}m${secs.toString().padStart(2, "0")}s`
+        } else {
+          return `${secs}s`
+        }
+      }
+      
       const now = new Date()
       const fileName = `Voice_${now.getFullYear()}-${(now.getMonth() + 1)
         .toString()
@@ -167,9 +196,7 @@ const Recording = () => {
         .padStart(2, "0")}-${now
         .getSeconds()
         .toString()
-        .padStart(2, "0")}@${Math.floor(
-        streamRef.current.getAudioTracks()[0].getSettings().sampleRate / 1000
-      )}s.${audioType}`
+        .padStart(2, "0")}＠${formatDuration(elapsedTime)}.${audioType}`
       downloadElement.download = fileName
       downloadElement.click()
       window.URL.revokeObjectURL(tempURL)
