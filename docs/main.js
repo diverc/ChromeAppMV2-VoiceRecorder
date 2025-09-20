@@ -108,9 +108,12 @@ const Recording = () => {
         // タイマー開始
         startTimeRef.current = Date.now()
         timerRef.current = setInterval(() => {
-          if (!paused) {
-            setElapsedTime(Math.floor((Date.now() - startTimeRef.current - pausedTimeRef.current) / 1000))
-          }
+          setElapsedTime(prevTime => {
+            if (paused) {
+              return prevTime; // 一時停止中は前の値をそのまま返す
+            }
+            return Math.floor((Date.now() - startTimeRef.current - pausedTimeRef.current) / 1000);
+          });
         }, 1000)
       } catch (e) {
         // 失敗したとき
