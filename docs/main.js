@@ -2,6 +2,7 @@ const Recording = () => {
   const { useState, useRef, useEffect } = React
 
   const [recording, setRecording] = useState(false) // 録音中かどうか
+  const [paused, setPaused] = useState(false) // 一時停止中かどうか
   const [audioURL, setAudioURL] = useState("")
   const [audioType, setAudioType] = useState("mp3")
   const [elapsedTime, setElapsedTime] = useState(0) // 経過時間（秒）
@@ -16,6 +17,7 @@ const Recording = () => {
   const chunksRef = useRef()
   const timerRef = useRef() // タイマー用のref
   const startTimeRef = useRef() // 録音開始時間
+  const pausedTimeRef = useRef(0) // 一時停止の累計時間
 
   const supportedAudioTypes = ["wav", "mp3", "flac"] // コンポーネント内に移動
 
@@ -23,7 +25,9 @@ const Recording = () => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       try {
         setRecording(true)
+        setPaused(false)
         setElapsedTime(0) // 経過時間をリセット
+        pausedTimeRef.current = 0 // 一時停止時間もリセット
         if (audioURL) {
           window.URL.revokeObjectURL(audioURL)
         }
@@ -46,7 +50,7 @@ const Recording = () => {
           setAudioURL(url)
 
           // 最終的な録音時間を計算
-          const finalElapsedTime = Math.floor((Date.now() - startTimeRef.current) / 1000)
+          const finalElapsedTime = Math.floor((Date.now() - startTimeRef.current - pausedTimeRef.current) / 1000)
 
           // 録音時間を時間:分:秒形式に変換
           const formatDuration = (seconds) => {
@@ -103,12 +107,16 @@ const Recording = () => {
         // タイマー開始
         startTimeRef.current = Date.now()
         timerRef.current = setInterval(() => {
-          setElapsedTime(Math.floor((Date.now() - startTimeRef.current) / 1000))
+          if (!paused) {
+            setElapsedTime(Math.floor((Date.now() - startTimeRef.current - pausedTimeRef.current) / 1000))
+          }
         }, 1000)
       } catch (e) {
         // 失敗したとき
         console.error(e)
         setRecording(false)
+    setPaused(false)
+        setPaused(false)
         if (timerRef.current) {
           clearInterval(timerRef.current)
         }
@@ -116,7 +124,23 @@ const Recording = () => {
     }
   }
 
-  const recordingStop = () => {
+  const pauseRecording = () => {
+    if (mediaRecorderRef.current && recording && !paused) {
+      mediaRecorderRef.current.pause()
+      setPaused(true)
+      // 一時停止開始時間を記録
+      pausedTimeRef.pauseStartTime = Date.now()
+    }
+  }
+
+  const resumeRecording = () => {
+    if (mediaRecorderRef.current && recording && paused) {
+      mediaRecorderRef.current.resume()
+      setPaused(false)
+      // 一時停止していた時間を累計に追加
+      pausedTimeRef.current += Date.now() - pausedTimeRef.pauseStartTime
+    }
+  }
     mediaRecorderRef?.current.stop()
     streamRef?.current.getTracks().forEach(track => {
       track.stop()
@@ -246,7 +270,7 @@ const Recording = () => {
   return (
     <>
       <h1>オフライン録音</h1>
-      <p className="app-description">データ送付しない録音アプリ<br />拡張機能でDiscodeへファイル送付可能</p>
+      <p className="app-description">インターネットへ接続不要の録音アプリ<br />録音終了後、Discodeへ送付可能</p>
       <div className="recording-main-menu">
         <div className="recording-controls">
           <div className="recording-buttons">
@@ -256,6 +280,16 @@ const Recording = () => {
             >
               {recording ? "録音終了" : "録音開始"}
             </button>
+            {recording && (
+              <>
+                <button
+                  className="simple-button"
+                  onClick={paused ? resumeRecording : pauseRecording}
+                >
+                  {paused ? "再開" : "一時停止"}
+                </button>
+              </>
+            )}
           </div>
           <div className="audio-type-select">
             <label htmlFor="audioType">フォーマット:</label>
@@ -275,7 +309,7 @@ const Recording = () => {
         </div>
         {recording && (
           <div className="recording-timer">
-            録音時間: {elapsedTime}秒
+            録音時間: {elapsedTime}秒 {paused && <span style={{color: 'orange'}}>(一時停止中)</span>}
           </div>
         )}
         {audioURL && !recording && (
