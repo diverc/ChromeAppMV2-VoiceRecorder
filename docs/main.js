@@ -246,7 +246,7 @@ const Recording = () => {
   return (
     <>
       <h1>オフライン録音</h1>
-      <p className="app-description">インターネットへ接続不要の録音アプリ<br />録音終了後、Discodeへ送付可能</p>
+      <p className="app-description">データ送付しない録音アプリ<br />拡張機能でDiscodeへファイル送付可能</p>
       <div className="recording-main-menu">
         <div className="recording-controls">
           <div className="recording-buttons">
