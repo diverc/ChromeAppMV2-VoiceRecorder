@@ -1,28 +1,54 @@
-
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <title>ボイスレコーダー</title>
+  <meta charset="UTF-8" />
+  <title>オフライン録音</title>
   <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+</head>
 <body>
-  <div class="container" title="2024年1月 ChromeOS Flexでローカルで使えるボイスレコーダーがないので作りました。">
-    <div class="header">
-      <h1 class="title">🎙 ボイスレコーダー 🎤 </h1>
-	  外部Webサーバにアクセスしないボイスレコーダー	
+  <div id="app-container">
+    <h1>オフライン録音</h1>
+  <p class="app-description">インターネットへ接続不要の録音アプリ<br />録音終了後、Discodeへ送付可能</p>
+  
+  <div class="recording-main-menu">
+    <div class="recording-controls">
+      <div class="recording-buttons">
+        <button id="recordButton" class="simple-button">録音開始</button>
+        <button id="pauseButton" class="simple-button" style="display: none;">一時停止</button>
+      </div>
+      <div class="audio-type-select">
+        <label for="audioType">フォーマット:</label>
+        <select id="audioType">
+          <option value="wav">WAV</option>
+          <option value="mp3" selected>MP3</option>
+          <option value="flac">FLAC</option>
+        </select>
+      </div>
     </div>
-    <div class="controls" title="クリックで録音開始・録音停止することができます。（エンターキーやスペースキーでも可）" >
-      <button class="button" id="btnStart">  [ ⏺ 録音開始 START ■ ]  </button>
-      <button class="button" id="btnStop" hidden>  [ ■ Stop 録音停止 ⏹]</button>
+    
+    <div id="timer" class="recording-timer" style="display: none;">
+      録音時間: <span id="elapsedTime">0</span>秒 <span id="pauseStatus" style="color: orange; display: none;">(一時停止中)</span>
     </div>
-    <div class="recording" title="録音後に再生できるようになります。">
-      <div class="recording-time">00 s</div>
-	  <hr>
-      <audio controls id="player"></audio>
-      <br><div id="greeting"></div>
+    
+    <div id="recordedFileInfo" class="recorded-file-info" style="display: none;">
+      <p>録音ファイル: <span id="audioFileName"></span></p>
+      <audio id="audioPlayer" controls controlsList="nodownload"></audio>
+      <button id="toggleDiscordButton" class="simple-button">拡張チェック</button>
+      <div id="discordControls" class="discord-controls" style="display: none;">
+        <input
+          type="text"
+          id="discordWebhookUrl"
+          placeholder="Discord Webhook URL"
+          style="width: 100%; padding: 8px; margin: 10px 0"
+        />
+        <button id="uploadButton" class="simple-button" disabled>DiscordへUpload</button>
+      </div>
     </div>
   </div>
-    <script src="main.js"></script>
+
+  <script src="main.js" defer></script>
+
+  令和7年9月20日版
+  </div>
 </body>
 </html>

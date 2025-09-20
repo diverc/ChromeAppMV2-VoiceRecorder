@@ -1,74 +1,139 @@
-/* CSS file placeholder. */
 body {
-  background-color: #333333;
-  font-family: sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #333;
+}
+
+#app-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   text-align: center;
+  backdrop-filter: blur(10px);
+  max-width: 450px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.container {
-  width: 400px;
-  margin: 0 auto;
+h1 {
+  color: #4a5568;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.header {
-  background-color: #555555;
-  color: #ffffff;
-  padding: 10px;
+.app-description {
+  color: #718096;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  max-width: 400px;
+}
+
+.recording-main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.recording-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.recording-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.simple-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 25px;
   border-radius: 10px;
-}
-
-.icon {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
-  border-radius: 50%;
-}
-
-.title {
-  font-size: 20px;
-  color: #ffffff;
-  font-weight: bold;
-  
-}
-
-.recording {
-  background-color: #ffffff;
-  border: 1px solid #555555;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 40px;
-}
-
-.recording-time {
-  font-size: 12px;
-  color: #555555;
-}
-
-.controls {
-  background-color: #2f2f2f;
-  border: 1px solid #555555;
-  padding: 10px;
-  border-radius: 10px;
-
-
-  margin-top: 40px;
-  border-radius: 10px;
-}
-
-.button {
-  width: 350px;
-  height: 90px;
-  background-color: #ffffff;
-  color: #555555;
-  border: 2px solid #555555;
   cursor: pointer;
-  font-size: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(118, 75, 162, 0.3);
+  min-width: 120px;
+}
 
-  /* 影をつける */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.simple-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(118, 75, 162, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
 
-  /* ボタンを押した時の色を変更する */
-  &:hover {
-    background-color: #e6e6e6;
-  }
+.simple-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.audio-type-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.recording-timer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00796b;
+  background-color: #e0f2f1;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.recorded-file-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+audio {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.discord-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: 10px;
 }
