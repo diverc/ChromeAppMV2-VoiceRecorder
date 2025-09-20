@@ -141,6 +141,8 @@ const Recording = () => {
       pausedTimeRef.current += Date.now() - pausedTimeRef.pauseStartTime
     }
   }
+  
+  const recordingStop = () => {
     mediaRecorderRef?.current.stop()
     streamRef?.current.getTracks().forEach(track => {
       track.stop()
