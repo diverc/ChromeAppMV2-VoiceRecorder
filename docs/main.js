@@ -45,6 +45,9 @@ const Recording = () => {
           const url = window.URL.createObjectURL(audioBlob)
           setAudioURL(url)
 
+          // 最終的な録音時間を計算
+          const finalElapsedTime = Math.floor((Date.now() - startTimeRef.current) / 1000)
+
           // 録音時間を時間:分:秒形式に変換
           const formatDuration = (seconds) => {
             const hrs = Math.floor(seconds / 3600)
@@ -72,7 +75,7 @@ const Recording = () => {
             .padStart(2, "0")}-${now
             .getSeconds()
             .toString()
-            .padStart(2, "0")}@${formatDuration(elapsedTime)}.${audioType}`
+            .padStart(2, "0")}@${formatDuration(finalElapsedTime)}.${audioType}`
           setAudioFileName(fileName)
 
           // 録音終了時に自動ダウンロード
@@ -196,7 +199,7 @@ const Recording = () => {
         .padStart(2, "0")}-${now
         .getSeconds()
         .toString()
-        .padStart(2, "0")}＠${formatDuration(elapsedTime)}.${audioType}`
+        .padStart(2, "0")}@${formatDuration(elapsedTime)}.${audioType}`
       downloadElement.download = fileName
       downloadElement.click()
       window.URL.revokeObjectURL(tempURL)
