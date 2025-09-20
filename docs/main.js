@@ -18,6 +18,7 @@ const Recording = () => {
   const timerRef = useRef() // タイマー用のref
   const startTimeRef = useRef() // 録音開始時間
   const pausedTimeRef = useRef(0) // 一時停止の累計時間
+  const pauseStartTimeRef = useRef() // 一時停止開始時間
 
   const supportedAudioTypes = ["wav", "mp3", "flac"] // コンポーネント内に移動
 
@@ -129,7 +130,7 @@ const Recording = () => {
       mediaRecorderRef.current.pause()
       setPaused(true)
       // 一時停止開始時間を記録
-      pausedTimeRef.pauseStartTime = Date.now()
+      pauseStartTimeRef.current = Date.now()
     }
   }
 
@@ -138,10 +139,10 @@ const Recording = () => {
       mediaRecorderRef.current.resume()
       setPaused(false)
       // 一時停止していた時間を累計に追加
-      pausedTimeRef.current += Date.now() - pausedTimeRef.pauseStartTime
+      pausedTimeRef.current += Date.now() - pauseStartTimeRef.current
     }
   }
-  
+
   const recordingStop = () => {
     mediaRecorderRef?.current.stop()
     streamRef?.current.getTracks().forEach(track => {
