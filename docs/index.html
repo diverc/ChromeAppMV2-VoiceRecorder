@@ -1,28 +1,18 @@
-
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <title>ボイスレコーダー</title>
+  <meta charset="UTF-8" />
+  <title>オフライン録音</title>
   <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
 <body>
-  <div class="container" title="2024年1月 ChromeOS Flexでローカルで使えるボイスレコーダーがないので作りました。">
-    <div class="header">
-      <h1 class="title">🎙 ボイスレコーダー 🎤 </h1>
-	  外部Webサーバにアクセスしないボイスレコーダー	
-    </div>
-    <div class="controls" title="クリックで録音開始・録音停止することができます。（エンターキーやスペースキーでも可）" >
-      <button class="button" id="btnStart">  [ ⏺ 録音開始 START ■ ]  </button>
-      <button class="button" id="btnStop" hidden>  [ ■ Stop 録音停止 ⏹]</button>
-    </div>
-    <div class="recording" title="録音後に再生できるようになります。">
-      <div class="recording-time">00 s</div>
-	  <hr>
-      <audio controls id="player"></audio>
-      <br><div id="greeting"></div>
-    </div>
-  </div>
-    <script src="main.js"></script>
+
+  <div id="root"></div>
+
+  <script type="text/babel" src="main.js"></script>
+
 </body>
 </html>

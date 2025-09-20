@@ -1,1 +1,103 @@
-body{background-color:#333333;font-family:sans-serif;text-align:center;}.container{width:400px;margin:0 auto;}.header{background-color:#555555;color:#ffffff;padding:10px;border-radius:10px;}.icon{width:50px;height:50px;margin:0 auto;border-radius:50%;}.title{font-size:20px;color:#ffffff;font-weight:bold;}.recording{background-color:#ffffff;border:1px solid #555555;padding:10px;border-radius:10px;margin-top:40px;}.recording-time{font-size:12px;color:#555555;}.controls{background-color:#2f2f2f;border:1px solid #555555;padding:10px;border-radius:10px;margin-top:40px;border-radius:10px;}.button{width:350px;height:90px;background-color:#ffffff;color:#555555;border:2pxsolid#555555;cursor:pointer;font-size:25px;box-shadow:04px10pxrgba(0,0,0,0.2);&:hover{background-color:#e6e6e6;}}
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #333;
+}
+
+#root {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+  width: 90%;
+}
+
+h1 {
+  color: #4a5568;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-description {
+  color: #718096;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+.recording-main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 250px; /* 録音開始後に全体のサイズが変わらないように調整 */
+}
+
+.recording-buttons {
+  margin-bottom: 1rem;
+}
+
+.simple-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(118, 75, 162, 0.3);
+  min-width: 200px;
+}
+
+.simple-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(118, 75, 162, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.simple-button:disabled {
+  background-color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+audio {
+  width: 100%;
+}
+
+.recording-download-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.recording-timer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00796b;
+  background-color: #e0f2f1;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
